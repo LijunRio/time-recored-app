@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Segment Timer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2ecc71;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .input-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .input-section h1 {
+            color: #2ecc71;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2ecc71;
+        }
+
+        .input-group .help-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-start {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-start:hover {
+            background: #27ae60;
+        }
+
+        .btn-start:active {
+            transform: scale(0.98);
+        }
+
+        .btn-reset {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #c0392b;
+        }
+
+        /* Full Screen Timer */
+        .timer-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2ecc71;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .timer-section.active {
+            display: flex;
+        }
+
+        .stage-label {
+            font-size: 36px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .timer-display {
+            font-size: 180px;
+            font-weight: bold;
+            color: white;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 15px;
+            margin: 20px 0;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer-display.warning {
+            color: white;
+            animation: pulse 1s infinite;
+        }
+
+        .timer-display.urgent {
+            animation: pulse 0.5s infinite;
+        }
+
+        .timer-section.buffer {
+            background: #3498db;
+        }
+
+        .timer-section.prep {
+            background: #9b59b6;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .timer-info {
+            margin-top: 60px;
+            display: flex;
+            gap: 40px;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 20px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .info-value {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 40px;
+            width: 100%;
+            display: flex;
+            gap: 20px;
+            padding: 0 40px;
+            justify-content: center;
+        }
+
+        .controls button {
+            width: 150px;
+            padding: 15px;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 10px;
+        }
+
+        .controls button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .completion-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2ecc71;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .completion-message.show {
+            display: flex;
+        }
+
+        .completion-message h2 {
+            font-size: 72px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .completion-message p {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 50px;
+        }
+
+        .completion-message button {
+            width: 200px;
+            padding: 15px;
+            font-size: 18px;
+            background: white;
+            color: #2ecc71;
+            border-radius: 10px;
+        }
+
+        .completion-message button:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .timer-display {
+                font-size: 100px;
+                letter-spacing: 8px;
+            }
+
+            .stage-label {
+                font-size: 24px;
+            }
+
+            .timer-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .controls {
+                padding: 0 20px;
+                gap: 10px;
+            }
+
+            .controls button {
+                width: 100px;
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Input Section -->
+    <div class="input-section" id="inputSection">
+        <h1>⏱️ Timer</h1>
+
+        <div class="input-group">
+            <label for="segmentsInput">Time Segments (minutes)</label>
+            <input 
+                type="text" 
+                id="segmentsInput" 
+                placeholder="e.g., 15 5"
+                value="15 5"
+            >
+            <div class="help-text">Separate multiple segments with spaces</div>
+        </div>
+
+        <div class="input-group">
+            <label for="segmentNamesInput">Segment Labels (optional)</label>
+            <input 
+                type="text" 
+                id="segmentNamesInput" 
+                placeholder="e.g., Presentation Q&A"
+                value="Presentation Q&A"
+            >
+            <div class="help-text">Separate with spaces, matching segment order</div>
+        </div>
+
+        <div class="input-group">
+            <label for="bufferInput">Buffer (seconds)</label>
+            <input 
+                type="number" 
+                id="bufferInput" 
+                value="20"
+                min="0"
+                max="300"
+            >
+        </div>
+
+        <div class="button-group">
+            <button class="btn-start" id="startBtn">Start</button>
+            <button class="btn-reset" id="resetBtn">Clear</button>
+        </div>
+    </div>
+
+    <!-- Full Screen Timer -->
+    <div class="timer-section" id="timerSection">
+        <div class="stage-label" id="stageLabel">Presentation</div>
+        <div class="timer-display" id="timerDisplay">15:00</div>
+
+        <div class="timer-info">
+            <div class="info-item">
+                <div class="info-label">Segment</div>
+                <div class="info-value" id="currentSegment">1/2</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Total</div>
+                <div class="info-value" id="totalRemaining">20:00</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="pauseBtn">Pause</button>
+            <button id="stopBtn">Stop</button>
+        </div>
+    </div>
+
+    <!-- Completion Message -->
+    <div class="completion-message" id="completionMessage">
+        <h2>✓ Complete!</h2>
+        <p>All segments finished</p>
+        <button onclick="location.reload()">Back</button>
+    </div>
+
+    <script>
+        class MultiSegmentTimer {
+            constructor() {
+                this.segments = [];
+                this.segmentNames = [];
+                this.bufferInterval = 20;
+                this.currentSegmentIndex = 0;
+                this.timeRemaining = 0;
+                this.isRunning = false;
+                this.isPaused = false;
+                this.timerInterval = null;
+                this.isInBuffer = false;
+                this.bufferRemaining = 0;
+
+                this.initializeElements();
+                this.attachEventListeners();
+            }
+
+            initializeElements() {
+                this.inputSection = document.getElementById('inputSection');
+                this.timerSection = document.getElementById('timerSection');
+                this.completionMessage = document.getElementById('completionMessage');
+                this.segmentsInput = document.getElementById('segmentsInput');
+                this.segmentNamesInput = document.getElementById('segmentNamesInput');
+                this.bufferInput = document.getElementById('bufferInput');
+                this.startBtn = document.getElementById('startBtn');
+                this.resetBtn = document.getElementById('resetBtn');
+                this.pauseBtn = document.getElementById('pauseBtn');
+                this.stopBtn = document.getElementById('stopBtn');
+                this.timerDisplay = document.getElementById('timerDisplay');
+                this.stageLabel = document.getElementById('stageLabel');
+                this.currentSegmentInfo = document.getElementById('currentSegment');
+                this.totalRemainingInfo = document.getElementById('totalRemaining');
+            }
+
+            attachEventListeners() {
+                this.startBtn.addEventListener('click', () => this.start());
+                this.resetBtn.addEventListener('click', () => this.reset());
+                this.pauseBtn.addEventListener('click', () => this.togglePause());
+                this.stopBtn.addEventListener('click', () => this.stop());
+            }
+
+            parseInput() {
+                const segmentsStr = this.segmentsInput.value.trim();
+                const namesStr = this.segmentNamesInput.value.trim();
+
+                if (!segmentsStr) {
+                    alert('Please enter at least one time segment');
+                    return false;
+                }
+
+                this.segments = segmentsStr.split(/\s+/).map(s => {
+                    const num = parseInt(s);
+                    return isNaN(num) || num < 0 ? 0 : num;
+                });
+
+                if (this.segments.length === 0 || this.segments.every(s => s === 0)) {
+                    alert('Please enter valid time segments');
+                    return false;
+                }
+
+                this.segmentNames = namesStr.split(/\s+/);
+                while (this.segmentNames.length < this.segments.length) {
+                    this.segmentNames.push(`Segment ${this.segmentNames.length + 1}`);
+                }
+
+                this.bufferInterval = parseInt(this.bufferInput.value) || 20;
+                return true;
+            }
+
+            start() {
+                if (!this.parseInput()) return;
+
+                this.currentSegmentIndex = 0;
+                this.isRunning = true;
+                this.isPaused = false;
+                this.isInBuffer = false;
+                this.timeRemaining = this.segments[0] * 60;
+                this.bufferRemaining = this.bufferInterval;
+
+                this.inputSection.style.display = 'none';
+                this.timerSection.classList.add('active');
+                this.timerSection.style.background = '#2ecc71';
+
+                this.updateDisplay();
+                this.startCountdown();
+            }
+
+            startCountdown() {
+                this.timerInterval = setInterval(() => {
+                    if (!this.isPaused) {
+                        if (this.isInBuffer) {
+                            this.bufferRemaining--;
+                            if (this.bufferRemaining <= 0) {
+                                this.currentSegmentIndex++;
+                                if (this.currentSegmentIndex < this.segments.length) {
+                                    this.isInBuffer = false;
+                                    this.timeRemaining = this.segments[this.currentSegmentIndex] * 60;
+                                    this.playNotification();
+                                } else {
+                                    this.complete();
+                                    return;
+                                }
+                            }
+                        } else {
+                            this.timeRemaining--;
+                            if (this.timeRemaining <= 0) {
+                                this.playNotification();
+                                if (this.currentSegmentIndex < this.segments.length - 1) {
+                                    this.isInBuffer = true;
+                                    this.bufferRemaining = this.bufferInterval;
+                                } else {
+                                    this.complete();
+                                    return;
+                                }
+                            }
+                        }
+                        this.updateDisplay();
+                    }
+                }, 1000);
+            }
+
+            updateDisplay() {
+                if (this.isInBuffer) {
+                    this.timerDisplay.textContent = this.formatTime(this.bufferRemaining);
+                    this.stageLabel.textContent = 'Buffer';
+                    this.timerSection.style.background = '#3498db';
+                } else {
+                    this.timerDisplay.textContent = this.formatTime(this.timeRemaining);
+                    this.stageLabel.textContent = this.segmentNames[this.currentSegmentIndex] || `Segment ${this.currentSegmentIndex + 1}`;
+                    this.updateBackgroundColor();
+                }
+
+                this.currentSegmentInfo.textContent = `${this.currentSegmentIndex + 1}/${this.segments.length}`;
+                const totalRemaining = this.calculateRemainingTime();
+                this.totalRemainingInfo.textContent = this.formatTime(totalRemaining);
+            }
+
+            updateBackgroundColor() {
+                if (this.timeRemaining <= 60) {
+                    this.timerSection.style.background = '#e74c3c';
+                } else if (this.timeRemaining <= 300) {
+                    if (this.currentSegmentIndex === this.segments.length - 1) {
+                        if (this.timeRemaining <= 120) {
+                            this.timerSection.style.background = '#9b59b6';
+                        } else {
+                            this.timerSection.style.background = '#f39c12';
+                        }
+                    } else {
+                        this.timerSection.style.background = '#f39c12';
+                    }
+                } else {
+                    this.timerSection.style.background = '#2ecc71';
+                }
+            }
+
+            calculateRemainingTime() {
+                let remaining = this.timeRemaining;
+
+                if (this.isInBuffer) {
+                    remaining = this.bufferRemaining;
+                }
+
+                for (let i = this.currentSegmentIndex + 1; i < this.segments.length; i++) {
+                    remaining += this.segments[i] * 60;
+                    if (i < this.segments.length - 1) {
+                        remaining += this.bufferInterval;
+                    }
+                }
+
+                return remaining;
+            }
+
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            togglePause() {
+                this.isPaused = !this.isPaused;
+                this.pauseBtn.textContent = this.isPaused ? 'Resume' : 'Pause';
+            }
+
+            stop() {
+                clearInterval(this.timerInterval);
+                this.isRunning = false;
+                this.isPaused = false;
+                this.timerSection.classList.remove('active');
+                this.completionMessage.classList.remove('show');
+                this.inputSection.style.display = 'block';
+                this.pauseBtn.textContent = 'Pause';
+            }
+
+            complete() {
+                clearInterval(this.timerInterval);
+                this.isRunning = false;
+                this.timerSection.classList.remove('active');
+                this.completionMessage.classList.add('show');
+                this.playCompletionSound();
+            }
+
+            reset() {
+                this.segmentsInput.value = '';
+                this.segmentNamesInput.value = '';
+                this.bufferInput.value = '20';
+            }
+
+            playNotification() {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                } catch (e) {
+                    // Browser does not support
+                }
+            }
+
+            playCompletionSound() {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+                    const playNote = (frequency, startTime, duration) => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+
+                        oscillator.frequency.value = frequency;
+                        oscillator.type = 'sine';
+
+                        gainNode.gain.setValueAtTime(0.3, startTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+
+                        oscillator.start(startTime);
+                        oscillator.stop(startTime + duration);
+                    };
+
+                    const now = audioContext.currentTime;
+                    playNote(600, now, 0.3);
+                    playNote(800, now + 0.4, 0.3);
+                } catch (e) {
+                    // Browser does not support
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new MultiSegmentTimer();
+        });
+    </script>
+</body>
+</html>
