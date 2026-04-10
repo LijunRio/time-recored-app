@@ -18,41 +18,38 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
         .input-section {
             background: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            width: 100%;
+            width: 90%;
+            max-width: 980px;
             text-align: center;
         }
 
         .input-section h1 {
             color: #2ecc71;
-            margin-bottom: 25px;
-            font-size: 24px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
             margin-bottom: 30px;
             font-size: 28px;
         }
 
-        .input-section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f5f5f5;
-            border-radius: 10px;
+        .setup-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.9fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .setup-column {
+            min-width: 0;
         }
 
         .input-group {
             margin-bottom: 20px;
+            text-align: left;
         }
 
         .input-group label {
@@ -60,7 +57,7 @@
             color: #333;
             font-weight: bold;
             margin-bottom: 8px;
-            text-align: left;
+            font-size: 14px;
         }
 
         .input-group input {
@@ -75,24 +72,174 @@
         .input-group input:focus {
             outline: none;
             border-color: #2ecc71;
+            border-width: 2px;
         }
 
         .input-group .help-text {
             font-size: 12px;
             color: #999;
             margin-top: 5px;
-            text-align: left;
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+
+        .toggle-row label {
+            margin-bottom: 0;
+        }
+
+        .toggle-row input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #2ecc71;
+            cursor: pointer;
+        }
+
+        .color-picker-group {
+            padding: 12px 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #fafafa;
+            height: 100%;
+        }
+
+        .color-picker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .color-picker-header span {
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .color-picker-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .color-picker-item {
+            display: grid;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .color-picker-preview {
+            min-width: 0;
+        }
+
+        .color-picker-label {
+            color: #555;
+            font-size: 13px;
+            display: block;
+            margin-bottom: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .stage-preview-bar {
+            display: flex;
+            overflow: hidden;
+            border-radius: 999px;
+            height: 10px;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+        }
+
+        .stage-preview-segment {
+            height: 100%;
+        }
+
+        .stage-preview-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 5px;
+            font-size: 10px;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .color-control-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-control {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 10px;
+            color: #7a7a7a;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 5px 8px;
+            border-radius: 999px;
+            background: #f5f5f5;
+        }
+
+        .color-picker-item input[type="color"] {
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .time-control-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .time-control {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            color: #7a7a7a;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 5px 8px;
+            border-radius: 999px;
+            background: #f5f5f5;
+        }
+
+        .time-control input {
+            width: 54px;
+            padding: 4px 6px;
+            border: 1px solid #d8d8d8;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
         }
 
         .button-group {
             display: flex;
-            gap: 10px;
-            margin-top: 25px;
+            gap: 15px;
+            margin-top: 30px;
         }
 
-        button {
+        .btn-start, .btn-reset {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
             border-radius: 8px;
             font-size: 16px;
@@ -108,10 +255,7 @@
 
         .btn-start:hover {
             background: #27ae60;
-        }
-
-        .btn-start:active {
-            transform: scale(0.98);
+            transform: scale(1.02);
         }
 
         .btn-reset {
@@ -121,6 +265,7 @@
 
         .btn-reset:hover {
             background: #c0392b;
+            transform: scale(1.02);
         }
 
         /* Full Screen Timer */
@@ -143,8 +288,8 @@
         }
 
         .stage-label {
-            font-size: 36px;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 40px;
+            color: white;
             margin-bottom: 30px;
             font-weight: bold;
             text-transform: uppercase;
@@ -152,47 +297,62 @@
         }
 
         .timer-display {
-            font-size: 180px;
+            font-size: 150px;
             font-weight: bold;
             color: white;
             font-family: 'Courier New', monospace;
-            letter-spacing: 15px;
-            margin: 20px 0;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            letter-spacing: 20px;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .timer-display.warning {
+        .progress-panel {
+            width: min(720px, 82vw);
+            margin-top: 26px;
             color: white;
-            animation: pulse 1s infinite;
         }
 
-        .timer-display.urgent {
-            animation: pulse 0.5s infinite;
+        .progress-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .timer-section.buffer {
-            background: #3498db;
+        .progress-status {
+            padding: 6px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            font-weight: bold;
         }
 
-        .timer-section.prep {
-            background: #9b59b6;
+        .progress-track {
+            width: 100%;
+            height: 16px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.08);
-            }
+        .progress-fill {
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background: rgba(255, 255, 255, 0.9);
+            transform-origin: left center;
+            transition: width 0.4s ease, background-color 0.3s ease;
         }
 
         .timer-info {
             margin-top: 60px;
             display: flex;
-            gap: 40px;
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 20px;
+            gap: 60px;
+            color: white;
         }
 
         .info-item {
@@ -200,15 +360,15 @@
         }
 
         .info-label {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-bottom: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            opacity: 0.9;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
         .info-value {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
             font-family: 'Courier New', monospace;
         }
@@ -216,27 +376,30 @@
         .controls {
             position: fixed;
             bottom: 40px;
-            width: 100%;
             display: flex;
             gap: 20px;
-            padding: 0 40px;
             justify-content: center;
         }
 
         .controls button {
-            width: 150px;
-            padding: 15px;
-            font-size: 18px;
+            width: 140px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             border: 2px solid white;
-            border-radius: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .controls button:hover {
             background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
 
+        /* Completion Screen */
         .completion-message {
             display: none;
             position: fixed;
@@ -256,53 +419,80 @@
         }
 
         .completion-message h2 {
-            font-size: 72px;
+            font-size: 80px;
             color: white;
             margin-bottom: 30px;
         }
 
         .completion-message p {
-            font-size: 28px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 50px;
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
         }
 
         .completion-message button {
-            width: 200px;
-            padding: 15px;
+            padding: 16px 40px;
             font-size: 18px;
+            font-weight: bold;
             background: white;
             color: #2ecc71;
-            border-radius: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .completion-message button:hover {
             background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
         }
 
         @media (max-width: 768px) {
+            .input-section {
+                padding: 28px 20px;
+                max-width: 560px;
+            }
+
+            .setup-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
             .timer-display {
-                font-size: 100px;
-                letter-spacing: 8px;
+                font-size: 80px;
+                letter-spacing: 10px;
             }
 
             .stage-label {
-                font-size: 24px;
+                font-size: 28px;
+                margin-bottom: 20px;
             }
 
             .timer-info {
-                flex-direction: column;
-                gap: 20px;
+                gap: 30px;
+            }
+
+            .progress-panel {
+                width: 88vw;
+                margin-top: 20px;
+            }
+
+            .progress-meta {
+                gap: 10px;
+                font-size: 12px;
+            }
+
+            .info-value {
+                font-size: 28px;
             }
 
             .controls {
-                padding: 0 20px;
                 gap: 10px;
             }
 
             .controls button {
                 width: 100px;
-                padding: 10px;
+                padding: 12px;
                 font-size: 14px;
             }
         }
@@ -313,37 +503,61 @@
     <div class="input-section" id="inputSection">
         <h1>⏱️ Timer</h1>
 
-        <div class="input-group">
-            <label for="segmentsInput">Time Segments (minutes)</label>
-            <input 
-                type="text" 
-                id="segmentsInput" 
-                placeholder="e.g., 15 5"
-                value="15 5"
-            >
-            <div class="help-text">Separate multiple segments with spaces</div>
-        </div>
+        <div class="setup-grid">
+            <div class="setup-column">
+                <div class="input-group">
+                    <label for="segmentsInput">Time Segments (minutes)</label>
+                    <input 
+                        type="text" 
+                        id="segmentsInput" 
+                        placeholder="e.g., 15 5"
+                        value="15 5"
+                    >
+                    <div class="help-text">Separate multiple segments with spaces</div>
+                </div>
 
-        <div class="input-group">
-            <label for="segmentNamesInput">Segment Labels (optional)</label>
-            <input 
-                type="text" 
-                id="segmentNamesInput" 
-                placeholder="e.g., Presentation Q&A"
-                value="Presentation Q&A"
-            >
-            <div class="help-text">Separate with spaces, matching segment order</div>
-        </div>
+                <div class="input-group">
+                    <label for="segmentNamesInput">Segment Labels (optional)</label>
+                    <input 
+                        type="text" 
+                        id="segmentNamesInput" 
+                        placeholder="e.g., Presentation | Q&A"
+                        value="Presentation | Q&A"
+                    >
+                    <div class="help-text">Use | or commas to separate labels, matching segment order</div>
+                </div>
 
-        <div class="input-group">
-            <label for="bufferInput">Buffer (seconds)</label>
-            <input 
-                type="number" 
-                id="bufferInput" 
-                value="20"
-                min="0"
-                max="300"
-            >
+                <div class="input-group">
+                    <label for="bufferInput">Buffer (seconds)</label>
+                    <input 
+                        type="number" 
+                        id="bufferInput" 
+                        value="20"
+                        min="0"
+                        max="300"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <div class="toggle-row">
+                        <label for="soundEnabledInput">Sound Alerts</label>
+                        <input type="checkbox" id="soundEnabledInput" checked>
+                    </div>
+                    <div class="help-text">Play reminder sounds when a segment changes or the timer completes</div>
+                </div>
+            </div>
+
+            <div class="setup-column">
+                <div class="input-group">
+                    <div class="color-picker-group">
+                        <div class="color-picker-header">
+                            <span>Stage Colors</span>
+                        </div>
+                        <div class="color-picker-list" id="colorPickerList"></div>
+                    </div>
+                    <div class="help-text">Each stage can set its own colors and warning thresholds.</div>
+                </div>
+            </div>
         </div>
 
         <div class="button-group">
@@ -356,6 +570,16 @@
     <div class="timer-section" id="timerSection">
         <div class="stage-label" id="stageLabel">Presentation</div>
         <div class="timer-display" id="timerDisplay">15:00</div>
+
+        <div class="progress-panel">
+            <div class="progress-meta">
+                <span id="progressText">Stage Progress</span>
+                <span class="progress-status" id="progressStatus">On Track</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
 
         <div class="timer-info">
             <div class="info-item">
@@ -384,19 +608,27 @@
     <script>
         class MultiSegmentTimer {
             constructor() {
+                this.storageKey = 'meeting-timer-settings';
                 this.segments = [];
                 this.segmentNames = [];
+                this.segmentThemes = [];
+                this.defaultSegmentColors = ['#2ecc71', '#3498db', '#9b59b6', '#1abc9c', '#e84393'];
                 this.bufferInterval = 20;
                 this.currentSegmentIndex = 0;
                 this.timeRemaining = 0;
+                this.currentSegmentDuration = 0;
                 this.isRunning = false;
                 this.isPaused = false;
                 this.timerInterval = null;
                 this.isInBuffer = false;
                 this.bufferRemaining = 0;
+                this.isSoundEnabled = true;
+                this.audioContext = null;
 
                 this.initializeElements();
+                this.restoreSettings();
                 this.attachEventListeners();
+                console.log('Timer initialized');
             }
 
             initializeElements() {
@@ -405,22 +637,82 @@
                 this.completionMessage = document.getElementById('completionMessage');
                 this.segmentsInput = document.getElementById('segmentsInput');
                 this.segmentNamesInput = document.getElementById('segmentNamesInput');
+                this.colorPickerList = document.getElementById('colorPickerList');
                 this.bufferInput = document.getElementById('bufferInput');
+                this.soundEnabledInput = document.getElementById('soundEnabledInput');
                 this.startBtn = document.getElementById('startBtn');
                 this.resetBtn = document.getElementById('resetBtn');
                 this.pauseBtn = document.getElementById('pauseBtn');
                 this.stopBtn = document.getElementById('stopBtn');
                 this.timerDisplay = document.getElementById('timerDisplay');
                 this.stageLabel = document.getElementById('stageLabel');
+                this.progressText = document.getElementById('progressText');
+                this.progressStatus = document.getElementById('progressStatus');
+                this.progressFill = document.getElementById('progressFill');
                 this.currentSegmentInfo = document.getElementById('currentSegment');
                 this.totalRemainingInfo = document.getElementById('totalRemaining');
             }
 
             attachEventListeners() {
-                this.startBtn.addEventListener('click', () => this.start());
+                this.startBtn.addEventListener('click', () => {
+                    console.log('Start button clicked');
+                    this.start();
+                });
                 this.resetBtn.addEventListener('click', () => this.reset());
                 this.pauseBtn.addEventListener('click', () => this.togglePause());
                 this.stopBtn.addEventListener('click', () => this.stop());
+
+                [this.segmentsInput, this.segmentNamesInput, this.bufferInput].forEach(input => {
+                    input.addEventListener('input', () => this.saveSettings());
+                    input.addEventListener('keydown', event => {
+                        if (event.key === 'Enter') {
+                            event.preventDefault();
+                            this.start();
+                        }
+                    });
+                });
+
+                this.soundEnabledInput.addEventListener('change', () => {
+                    this.isSoundEnabled = this.soundEnabledInput.checked;
+                    this.saveSettings();
+                });
+
+                this.segmentsInput.addEventListener('input', () => this.renderColorPickers());
+                this.segmentNamesInput.addEventListener('input', () => this.renderColorPickers());
+            }
+
+            restoreSettings() {
+                try {
+                    const saved = localStorage.getItem(this.storageKey);
+                    if (!saved) return;
+
+                    const settings = JSON.parse(saved);
+                    this.segmentsInput.value = settings.segmentsInput || this.segmentsInput.value;
+                    this.segmentNamesInput.value = settings.segmentNamesInput || this.segmentNamesInput.value;
+                    this.segmentThemes = this.normalizeStoredThemes(settings.segmentThemes || settings.segmentColors);
+                    this.bufferInput.value = settings.bufferInput || this.bufferInput.value;
+                    this.isSoundEnabled = settings.isSoundEnabled !== false;
+                    this.soundEnabledInput.checked = this.isSoundEnabled;
+                } catch (error) {
+                    console.log('Unable to restore saved settings');
+                }
+
+                this.renderColorPickers();
+            }
+
+            saveSettings() {
+                try {
+                    const settings = {
+                        segmentsInput: this.segmentsInput.value,
+                        segmentNamesInput: this.segmentNamesInput.value,
+                        segmentThemes: this.segmentThemes,
+                        bufferInput: this.bufferInput.value,
+                        isSoundEnabled: this.soundEnabledInput.checked
+                    };
+                    localStorage.setItem(this.storageKey, JSON.stringify(settings));
+                } catch (error) {
+                    console.log('Unable to save settings');
+                }
             }
 
             parseInput() {
@@ -442,25 +734,252 @@
                     return false;
                 }
 
-                this.segmentNames = namesStr.split(/\s+/);
+                this.segmentNames = this.parseSegmentNames(namesStr);
                 while (this.segmentNames.length < this.segments.length) {
                     this.segmentNames.push(`Segment ${this.segmentNames.length + 1}`);
                 }
 
+                this.syncSegmentThemes(this.segments.length, this.segments);
+
                 this.bufferInterval = parseInt(this.bufferInput.value) || 20;
+                this.isSoundEnabled = this.soundEnabledInput.checked;
+                this.saveSettings();
+                console.log('Segments:', this.segments, 'Names:', this.segmentNames, 'Themes:', this.segmentThemes, 'Buffer:', this.bufferInterval);
                 return true;
+            }
+
+            parseSegmentNames(namesStr) {
+                if (!namesStr) return [];
+
+                if (/[|,\n]/.test(namesStr)) {
+                    return namesStr
+                        .split(/[|,\n]+/)
+                        .map(name => name.trim())
+                        .filter(Boolean);
+                }
+
+                return namesStr.split(/\s+/);
+            }
+
+            getDraftSegments() {
+                const segmentsStr = this.segmentsInput.value.trim();
+                if (!segmentsStr) return [];
+
+                return segmentsStr
+                    .split(/\s+/)
+                    .map(value => parseInt(value, 10))
+                    .filter(value => !isNaN(value) && value >= 0);
+            }
+
+            getDraftSegmentNames(segmentCount) {
+                const draftNames = this.parseSegmentNames(this.segmentNamesInput.value.trim());
+                while (draftNames.length < segmentCount) {
+                    draftNames.push(`Segment ${draftNames.length + 1}`);
+                }
+                return draftNames.slice(0, segmentCount);
+            }
+
+            normalizeStoredThemes(storedThemes) {
+                if (!Array.isArray(storedThemes)) return [];
+
+                return storedThemes.map((theme, index) => {
+                    if (typeof theme === 'string') {
+                        return this.createDefaultTheme(theme, index, 10);
+                    }
+
+                    const normalizedTheme = {
+                        safe: theme?.safe || this.defaultSegmentColors[index % this.defaultSegmentColors.length],
+                        warning: theme?.warning || '#f39c12',
+                        critical: theme?.critical || '#e74c3c',
+                        warningMinutes: Math.max(1, parseInt(theme?.warningMinutes, 10) || 5),
+                        criticalMinutes: Math.max(1, parseInt(theme?.criticalMinutes, 10) || 1)
+                    };
+
+                    if (normalizedTheme.criticalMinutes > normalizedTheme.warningMinutes) {
+                        normalizedTheme.criticalMinutes = normalizedTheme.warningMinutes;
+                    }
+
+                    return normalizedTheme;
+                });
+            }
+
+            createDefaultTheme(safeColor, index = 0, stageMinutes = 10) {
+                const warningMinutes = Math.max(1, Math.min(5, Math.max(1, stageMinutes - 1)));
+                const criticalMinutes = Math.max(1, Math.min(2, warningMinutes));
+
+                return {
+                    safe: safeColor || this.defaultSegmentColors[index % this.defaultSegmentColors.length],
+                    warning: '#f39c12',
+                    critical: '#e74c3c',
+                    warningMinutes,
+                    criticalMinutes
+                };
+            }
+
+            sanitizeThemeThresholds(theme, stageMinutes) {
+                const safeStageMinutes = Math.max(1, stageMinutes || 1);
+                const nextTheme = { ...theme };
+
+                nextTheme.warningMinutes = Math.max(1, parseInt(nextTheme.warningMinutes, 10) || 1);
+                nextTheme.criticalMinutes = Math.max(1, parseInt(nextTheme.criticalMinutes, 10) || 1);
+                nextTheme.warningMinutes = Math.min(nextTheme.warningMinutes, safeStageMinutes);
+                nextTheme.criticalMinutes = Math.min(nextTheme.criticalMinutes, nextTheme.warningMinutes);
+
+                return nextTheme;
+            }
+
+            syncSegmentThemes(targetCount = this.segments.length, stageMinutesList = []) {
+                const nextThemes = [];
+
+                for (let i = 0; i < targetCount; i++) {
+                    const stageMinutes = stageMinutesList[i] || 10;
+                    const sourceTheme = this.segmentThemes[i] || this.createDefaultTheme(this.defaultSegmentColors[i % this.defaultSegmentColors.length], i, stageMinutes);
+                    nextThemes.push(this.sanitizeThemeThresholds(sourceTheme, stageMinutes));
+                }
+
+                this.segmentThemes = nextThemes;
+            }
+
+            renderColorPickers() {
+                const draftSegments = this.getDraftSegments();
+                const segmentCount = draftSegments.length;
+                const draftNames = this.getDraftSegmentNames(segmentCount);
+                this.syncSegmentThemes(segmentCount, draftSegments);
+                this.colorPickerList.innerHTML = '';
+
+                if (!segmentCount) {
+                    const emptyState = document.createElement('div');
+                    emptyState.className = 'color-picker-item';
+                    emptyState.innerHTML = '<span class="color-picker-label">Add time segments to customize stage colors.</span>';
+                    this.colorPickerList.appendChild(emptyState);
+                    return;
+                }
+
+                draftNames.forEach((name, index) => {
+                    const theme = this.segmentThemes[index];
+                    const row = document.createElement('div');
+                    row.className = 'color-picker-item';
+
+                    const preview = document.createElement('div');
+                    preview.className = 'color-picker-preview';
+
+                    const label = document.createElement('span');
+                    label.className = 'color-picker-label';
+                    label.textContent = name;
+
+                    const previewBar = document.createElement('div');
+                    previewBar.className = 'stage-preview-bar';
+
+                    const draftMinutes = draftSegments[index] || 1;
+                    const warningMinutes = theme.warningMinutes;
+                    const criticalMinutes = theme.criticalMinutes;
+                    const safeMinutes = Math.max(draftMinutes - warningMinutes, 0);
+                    const warningWindow = Math.max(warningMinutes - criticalMinutes, 0);
+                    const criticalWindow = Math.min(criticalMinutes, draftMinutes);
+
+                    const safeSegment = document.createElement('span');
+                    safeSegment.className = 'stage-preview-segment';
+                    safeSegment.style.background = theme.safe;
+                    safeSegment.style.flex = String(Math.max(safeMinutes, 0.4));
+
+                    const warningSegment = document.createElement('span');
+                    warningSegment.className = 'stage-preview-segment';
+                    warningSegment.style.background = theme.warning;
+                    warningSegment.style.flex = String(Math.max(warningWindow, 0.3));
+
+                    const criticalSegment = document.createElement('span');
+                    criticalSegment.className = 'stage-preview-segment';
+                    criticalSegment.style.background = theme.critical;
+                    criticalSegment.style.flex = String(Math.max(criticalWindow, 0.3));
+
+                    previewBar.appendChild(safeSegment);
+                    previewBar.appendChild(warningSegment);
+                    previewBar.appendChild(criticalSegment);
+
+                    const previewMeta = document.createElement('div');
+                    previewMeta.className = 'stage-preview-meta';
+                    previewMeta.innerHTML = `<span>Safe</span><span>Warn ${warningMinutes}m</span><span>Crit ${criticalMinutes}m</span>`;
+
+                    preview.appendChild(label);
+                    preview.appendChild(previewBar);
+                    preview.appendChild(previewMeta);
+
+                    const colorControls = document.createElement('div');
+                    colorControls.className = 'color-control-group';
+
+                    ['safe', 'warning', 'critical'].forEach(key => {
+                        const control = document.createElement('label');
+                        control.className = 'color-control';
+                        control.textContent = key;
+
+                        const input = document.createElement('input');
+                        input.type = 'color';
+                        input.value = theme[key];
+                        input.setAttribute('aria-label', `${name} ${key} color`);
+                        input.addEventListener('input', event => {
+                            this.segmentThemes[index][key] = event.target.value;
+                            this.saveSettings();
+                            this.renderColorPickers();
+                        });
+
+                        control.appendChild(input);
+                        colorControls.appendChild(control);
+                    });
+
+                    const timeControls = document.createElement('div');
+                    timeControls.className = 'time-control-group';
+
+                    [
+                        { key: 'warningMinutes', label: 'Warn' },
+                        { key: 'criticalMinutes', label: 'Crit' }
+                    ].forEach(({ key, label: controlLabel }) => {
+                        const control = document.createElement('label');
+                        control.className = 'time-control';
+                        control.textContent = controlLabel;
+
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.min = '1';
+                        input.max = String(draftMinutes);
+                        input.value = String(theme[key]);
+                        input.setAttribute('aria-label', `${name} ${controlLabel} minutes`);
+                        input.addEventListener('input', event => {
+                            const nextValue = Math.max(1, parseInt(event.target.value, 10) || 1);
+                            this.segmentThemes[index][key] = nextValue;
+
+                            if (key === 'warningMinutes' && this.segmentThemes[index].criticalMinutes > nextValue) {
+                                this.segmentThemes[index].criticalMinutes = nextValue;
+                            }
+
+                            this.segmentThemes[index] = this.sanitizeThemeThresholds(this.segmentThemes[index], draftMinutes);
+                            this.saveSettings();
+                            this.renderColorPickers();
+                        });
+
+                        control.appendChild(input);
+                        timeControls.appendChild(control);
+                    });
+
+                    row.appendChild(preview);
+                    row.appendChild(colorControls);
+                    row.appendChild(timeControls);
+                    this.colorPickerList.appendChild(row);
+                });
             }
 
             start() {
                 if (!this.parseInput()) return;
 
+                clearInterval(this.timerInterval);
                 this.currentSegmentIndex = 0;
                 this.isRunning = true;
                 this.isPaused = false;
                 this.isInBuffer = false;
                 this.timeRemaining = this.segments[0] * 60;
+                this.currentSegmentDuration = this.timeRemaining;
                 this.bufferRemaining = this.bufferInterval;
 
+                console.log('Timer started');
                 this.inputSection.style.display = 'none';
                 this.timerSection.classList.add('active');
                 this.timerSection.style.background = '#2ecc71';
@@ -479,6 +998,7 @@
                                 if (this.currentSegmentIndex < this.segments.length) {
                                     this.isInBuffer = false;
                                     this.timeRemaining = this.segments[this.currentSegmentIndex] * 60;
+                                    this.currentSegmentDuration = this.timeRemaining;
                                     this.playNotification();
                                 } else {
                                     this.complete();
@@ -508,9 +1028,10 @@
                     this.timerDisplay.textContent = this.formatTime(this.bufferRemaining);
                     this.stageLabel.textContent = 'Buffer';
                     this.timerSection.style.background = '#3498db';
+                    this.updateProgressBar(this.bufferRemaining, this.bufferInterval, '#3498db', 'Buffer Time');
                 } else {
                     this.timerDisplay.textContent = this.formatTime(this.timeRemaining);
-                    this.stageLabel.textContent = this.segmentNames[this.currentSegmentIndex] || `Segment ${this.currentSegmentIndex + 1}`;
+                    this.stageLabel.textContent = this.segmentNames[this.currentSegmentIndex];
                     this.updateBackgroundColor();
                 }
 
@@ -520,21 +1041,36 @@
             }
 
             updateBackgroundColor() {
-                if (this.timeRemaining <= 60) {
-                    this.timerSection.style.background = '#e74c3c';
-                } else if (this.timeRemaining <= 300) {
-                    if (this.currentSegmentIndex === this.segments.length - 1) {
-                        if (this.timeRemaining <= 120) {
-                            this.timerSection.style.background = '#9b59b6';
-                        } else {
-                            this.timerSection.style.background = '#f39c12';
-                        }
-                    } else {
-                        this.timerSection.style.background = '#f39c12';
-                    }
-                } else {
-                    this.timerSection.style.background = '#2ecc71';
+                const segmentTheme = this.segmentThemes[this.currentSegmentIndex] || this.createDefaultTheme(this.defaultSegmentColors[this.currentSegmentIndex % this.defaultSegmentColors.length], this.currentSegmentIndex);
+                const { backgroundColor, statusText } = this.getStageVisualState(segmentTheme);
+
+                this.timerSection.style.background = backgroundColor;
+                this.updateProgressBar(this.timeRemaining, this.currentSegmentDuration, backgroundColor, statusText);
+            }
+
+            getStageVisualState(segmentTheme) {
+                const warningSeconds = segmentTheme.warningMinutes * 60;
+                const criticalSeconds = segmentTheme.criticalMinutes * 60;
+
+                if (this.timeRemaining <= criticalSeconds) {
+                    return { backgroundColor: segmentTheme.critical, statusText: 'Critical' };
                 }
+
+                if (this.timeRemaining <= warningSeconds) {
+                    return { backgroundColor: segmentTheme.warning, statusText: 'Warning' };
+                }
+
+                return { backgroundColor: segmentTheme.safe, statusText: 'On Track' };
+            }
+
+            updateProgressBar(remainingSeconds, totalSeconds, color, statusText) {
+                const safeTotal = Math.max(totalSeconds, 1);
+                const progressPercent = Math.max(0, Math.min(100, (remainingSeconds / safeTotal) * 100));
+
+                this.progressFill.style.width = `${progressPercent}%`;
+                this.progressFill.style.background = color;
+                this.progressText.textContent = `${Math.round(progressPercent)}% Remaining`;
+                this.progressStatus.textContent = statusText;
             }
 
             calculateRemainingTime() {
@@ -542,6 +1078,8 @@
 
                 if (this.isInBuffer) {
                     remaining = this.bufferRemaining;
+                } else if (this.currentSegmentIndex < this.segments.length - 1) {
+                    remaining += this.bufferInterval;
                 }
 
                 for (let i = this.currentSegmentIndex + 1; i < this.segments.length; i++) {
@@ -571,8 +1109,12 @@
                 this.isPaused = false;
                 this.timerSection.classList.remove('active');
                 this.completionMessage.classList.remove('show');
-                this.inputSection.style.display = 'block';
+                this.inputSection.style.display = '';
                 this.pauseBtn.textContent = 'Pause';
+                this.progressFill.style.width = '100%';
+                this.progressFill.style.background = 'rgba(255, 255, 255, 0.9)';
+                this.progressText.textContent = 'Stage Progress';
+                this.progressStatus.textContent = 'On Track';
             }
 
             complete() {
@@ -586,12 +1128,35 @@
             reset() {
                 this.segmentsInput.value = '';
                 this.segmentNamesInput.value = '';
+                this.segmentThemes = [];
                 this.bufferInput.value = '20';
+                this.soundEnabledInput.checked = true;
+                this.isSoundEnabled = true;
+                localStorage.removeItem(this.storageKey);
+                this.renderColorPickers();
+            }
+
+            getAudioContext() {
+                if (!this.audioContext) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    this.audioContext = AudioContextClass ? new AudioContextClass() : null;
+                }
+
+                if (this.audioContext && this.audioContext.state === 'suspended') {
+                    this.audioContext.resume().catch(() => {
+                        console.log('Audio resume failed');
+                    });
+                }
+
+                return this.audioContext;
             }
 
             playNotification() {
+                if (!this.isSoundEnabled) return;
+
                 try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const audioContext = this.getAudioContext();
+                    if (!audioContext) return;
                     const oscillator = audioContext.createOscillator();
                     const gainNode = audioContext.createGain();
 
@@ -607,13 +1172,16 @@
                     oscillator.start(audioContext.currentTime);
                     oscillator.stop(audioContext.currentTime + 0.5);
                 } catch (e) {
-                    // Browser does not support
+                    console.log('Audio notification failed');
                 }
             }
 
             playCompletionSound() {
+                if (!this.isSoundEnabled) return;
+
                 try {
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const audioContext = this.getAudioContext();
+                    if (!audioContext) return;
 
                     const playNote = (frequency, startTime, duration) => {
                         const oscillator = audioContext.createOscillator();
@@ -636,7 +1204,7 @@
                     playNote(600, now, 0.3);
                     playNote(800, now + 0.4, 0.3);
                 } catch (e) {
-                    // Browser does not support
+                    console.log('Completion sound failed');
                 }
             }
         }
